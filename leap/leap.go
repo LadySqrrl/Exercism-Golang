@@ -1,0 +1,19 @@
+//Test whether it is a leap year
+package leap
+
+// Calculates leap year
+func IsLeapYear(year int) bool {
+	if year%400 == 0 {
+		return true
+	}
+
+	if year%100 == 0 {
+		return false
+	}
+
+	if year%4 == 0 {
+		return true
+	}
+
+	return false
+}
