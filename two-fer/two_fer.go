@@ -4,7 +4,9 @@ package twofer
 // ShareWith should have a comment documenting it.
 func ShareWith(name string) string {
 
-	phrase := "One for " + name + " one for me."
-
-	return phrase
+	if name == "" {
+		return "One for you, one for me."
+	} else {
+		return "One for " + name + ", one for me."
+	}
 }
