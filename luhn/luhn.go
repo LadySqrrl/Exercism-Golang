@@ -10,52 +10,28 @@ import (
 //complete the Luhn algorith on the string
 func Valid(s string) bool {
 	s = strings.ReplaceAll(s, " ", "")
+	sum := 0
 
 	if len(s) < 2 {
 		return false
 	}
 
-	for _, c := range s {
-		if c < '0' || c > '9' {
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] < '0' || s[i] > '9' {
 			return false
 		}
-	}
-
-	intArr := make([]int, len(s))
-
-	for i := range s {
 		curr := s[i]
 		currInt, err := strconv.Atoi(string(curr))
 		if err != nil {
 			fmt.Println("error converting to int")
 		}
-		intArr[i] = currInt
-	}
-
-	if len(intArr)%2 == 0 {
-		for i := 0; i < len(intArr); i += 2 {
-			currInt := intArr[i]
+		if (len(s)%2 == 0 && i%2 == 0) || (len(s)%2 != 0 && i%2 != 0) {
 			currInt *= 2
 			if currInt > 9 {
 				currInt -= 9
 			}
-			intArr[i] = currInt
 		}
-	} else {
-		for i := 1; i < len(intArr); i += 2 {
-			currInt := intArr[i]
-			currInt *= 2
-			if currInt > 9 {
-				currInt -= 9
-			}
-			intArr[i] = currInt
-		}
-	}
-
-	sum := 0
-
-	for i := range intArr {
-		sum += intArr[i]
+		sum += currInt
 	}
 
 	return sum%10 == 0
